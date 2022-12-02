@@ -18,20 +18,21 @@ struct list_element_base {
   list_element_base& operator=(list_element_base const& other) = delete;
 
   list_element_base(list_element_base &&other) {
-    std::swap(prev, other.prev);
-    std::swap(prev->next, other.prev->next);
-    std::swap(next, other.next);
-    std::swap(next->prev, other.next->prev);
+    swap(other);
   }
 
   list_element_base& operator=(list_element_base&& other) {
     if (this != &other) {
-      std::swap(prev, other.prev);
-      std::swap(prev->next, other.prev->next);
-      std::swap(next, other.next);
-      std::swap(next->prev, other.next->prev);
+      swap(other);
     }
     return *this;
+  }
+  
+  void swap(list_element_base& other) {
+    std::swap(prev, other.prev);
+    std::swap(prev->next, other.prev->next);
+    std::swap(next, other.next);
+    std::swap(next->prev, other.next->prev);
   }
 
   ~list_element_base() {
