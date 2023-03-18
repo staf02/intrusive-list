@@ -168,12 +168,12 @@ struct list {
 
     iterator erase(const_iterator first, const_iterator last) noexcept {
         if (first != last) {
-            auto* start_ptr = static_cast<list_element<Tag>*>(first.ptr_);
-            auto* end_ptr = static_cast<list_element<Tag>*>(last.ptr_->prev);
+            auto start_ptr = static_cast<list_element<Tag>*>(first.ptr_);
+            auto end_ptr = static_cast<list_element<Tag>*>(last.ptr_->prev);
             cut(start_ptr, end_ptr);
-            auto* t = start_ptr;
+            auto t = start_ptr;
             while (t != end_ptr) {
-                auto* tmp = t->next;
+                auto tmp = t->next;
                 t->unlink();
                 t = static_cast<list_element<Tag>*>(tmp);
             }
@@ -191,9 +191,9 @@ struct list {
         if (first == last) {
             return;
         }
-        auto* start_ptr = static_cast<list_element<Tag>*>(first.ptr_);
-        auto* end_ptr = static_cast<list_element<Tag>*>(last.ptr_->prev);
-        auto* tmp_pos = static_cast<list_element<Tag>*>(pos.ptr_);
+        auto start_ptr = static_cast<list_element<Tag>*>(first.ptr_);
+        auto end_ptr = static_cast<list_element<Tag>*>(last.ptr_->prev);
+        auto tmp_pos = static_cast<list_element<Tag>*>(pos.ptr_);
         cut(start_ptr, end_ptr);
         link(start_ptr, end_ptr, tmp_pos);
     }
